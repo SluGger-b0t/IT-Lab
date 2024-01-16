@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Database CRUD</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="mt-4 mb-4">Employee Database CRUD</h1>
+
+
+    <form id="addForm" class="mb-4">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="position">Position:</label>
+                <input type="text" class="form-control" id="position" required>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="addEmployee()">Add Employee</button>
+    </form>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="employeeTableBody"></tbody>
+    </table>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<script>
+  
+    let employees = [
+        { id: 1, name: 'John Doe', position: 'Software Developer' },
+        { id: 2, name: 'Jane Smith', position: 'Project Manager' },
+       
+    ];
+
+   
+    function displayEmployees() {
+        const tableBody = document.getElementById('employeeTableBody');
+        tableBody.innerHTML = '';
+
+        employees.forEach(employee => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${employee.id}</td>
+                <td>${employee.name}</td>
+                <td>${employee.position}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editEmployee(${employee.id})">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteEmployee(${employee.id})">Delete</button>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+   
+    function addEmployee() {
+        const name = document.getElementById('name').value;
+        const position = document.getElementById('position').value;
+
+      
+        const newEmployee = {
+            id: employees.length + 1,
+            name: name,
+            position: position,
+        };
+        employees.push(newEmployee);
+
+       
+        displayEmployees();
+
+      
+        document.getElementById('name').value = '';
+        document.getElementById('position').value = '';
+    }
+
+   
+    function editEmployee(employeeId) {
+        //dont know
+    }
+
+  
+    function deleteEmployee(employeeId) {
+        
+        const index = employees.findIndex(employee => employee.id === employeeId);
+
+       
+        if (index !== -1) {
+            employees.splice(index, 1);
+        }
+
+        
+        displayEmployees();
+    }
+
+    
+    displayEmployees();
+</script>
+</body>
+</html>
