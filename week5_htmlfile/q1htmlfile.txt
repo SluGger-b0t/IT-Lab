@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Student Form:</title>
+</head>
+<body>
+    <h1>Student Details Form</h1>
+
+    <form id="studentForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required>
+
+        <label for="address">Address:</label>
+        <textarea id="address" rows="3" required></textarea>
+
+        <label for="contact">Contact Number:</label>
+        <input type="tel" id="contact" required>
+
+        <label for="email">Email ID:</label>
+        <input type="email" id="email" required>
+
+        <label for="english">English:</label>
+        <input type="number" id="english" required>
+
+        <label for="physics">Physics:</label>
+        <input type="number" id="physics" required>
+
+        <label for="chemistry">Chemistry:</label>
+        <input type="number" id="chemistry" required>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <hr>
+
+    <h2>Student Details</h2>
+<textarea id="displayDetails" rows="10" readonly></textarea>
+
+    <h3>Total Percentage of Marks Obtained: <span id="totalPercentage">-</span></h3>
+
+    <script>
+        function submitForm() {
+
+            var name = document.getElementById('name').value;
+            var dob = document.getElementById('dob').value;
+            var address = document.getElementById('address').value;
+            var contact = document.getElementById('contact').value;
+            var email = document.getElementById('email').value;
+            var englishMarks = parseInt(document.getElementById('english').value);
+            var physicsMarks = parseInt(document.getElementById('physics').value);
+            var chemistryMarks = parseInt(document.getElementById('chemistry').value);
+
+            
+            var totalMarks = englishMarks + physicsMarks + chemistryMarks;
+            var totalPercentage = (totalMarks / 300) * 100;
+
+            
+            var displayDetails = `Name: ${name}\nDate of Birth: ${dob}\nAddress: ${address}\nContact Number: ${contact}\nEmail ID: ${email}\n`;
+            displayDetails += `Marks in English: ${englishMarks}\nMarks in Physics: ${physicsMarks}\nMarks in Chemistry: ${chemistryMarks}\n`;
+
+            document.getElementById('displayDetails').value = displayDetails;
+            document.getElementById('totalPercentage').innerText = totalPercentage.toFixed(2) + '%';
+        }
+    </script>
+</body>
+</html>
