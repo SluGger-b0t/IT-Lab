@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Employee Promotion Eligibility:</title>
+</head>
+<body>
+    <h1>Employee Promotion Eligibility</h1>
+
+    <form id="employeeForm">
+        <label for="employeeId">Employee ID:</label>
+        <select id="employeeId">
+            <option value="1">Emp1</option>
+            <option value="2">Emp 2</option>
+            <option value="3">Emp 3</option>
+            
+        </select>
+
+        <label for="dateOfJoining">Date of Joining:</label>
+        <input type="date" id="dateOfJoining" required>
+
+        <button type="button" onclick="checkPromotionEligibility()">Am I Eligible for Promotion</button>
+    </form>
+
+    <hr>
+
+    <h2>Promotion Eligibility:</h2>
+    <label id="promotionResult">-</label>
+
+    <script>
+        function checkPromotionEligibility() {
+           
+            var employeeId = document.getElementById('employeeId').value;
+            var dateOfJoining = new Date(document.getElementById('dateOfJoining').value);
+
+           
+            var currentDate = new Date();
+
+           
+            var yearsOfExperience = currentDate.getFullYear() - dateOfJoining.getFullYear();
+
+           
+            var eligibilityResult = (yearsOfExperience > 5) ? 'YES' : 'NO';
+
+          
+            document.getElementById('promotionResult').innerText = `Promotion Eligibility: ${eligibilityResult}`;
+        }
+    </script>
+
+</body>
+</html>
